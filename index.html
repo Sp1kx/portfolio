@@ -219,7 +219,6 @@ button:hover{
   box-shadow:0 0 25px var(--neon);
 }
 
-/* Feedback mensaje formulario */
 #feedback{
   position:absolute;
   top:-30px;
@@ -241,17 +240,7 @@ button:hover{
 </header>
 
 <main>
-<section data-aos="fade-up">
-  <div class="glass about">
-    <h2>Sobre mí</h2><br>
-    <p>
-      Soy estudiante de <b>1º de SMR</b> con una fuerte pasión por la 
-      <b>ciberseguridad</b> y el desarrollo de <b>herramientas personalizadas</b>.
-      Me enfoco en el análisis ofensivo, automatización en Python y auditorías de seguridad.
-    </p>
-  </div>
-</section>
-
+    
 <section data-aos="fade-up">
   <h2>Skills</h2><br>
   <div class="skills-grid">
@@ -278,8 +267,89 @@ button:hover{
   </div>
 </section>
 
-<section data-aos="fade-up">
-  <h2>Proyectos Destacados</h2><br>
+<style>
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+@media(max-width:768px){
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div id="contactPopup">
+  <button id="contactBtn">Contacto</button>
+  <div id="contactMenu">
+    <a href="mailto:david02soriano@gmail.com" target="_blank">Email</a>
+    <a href="https://wa.me/34643787283" target="_blank">WhatsApp</a>
+    <a href="https://t.me/sp1kz" target="_blank">Telegram</a>
+  </div>
+</div>
+
+<style>
+#contactPopup {
+  position: fixed;
+  right: 20px;
+  bottom: 50%;
+  transform: translateY(50%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#contactBtn {
+  background: var(--neon);
+  color: black;
+  border: none;
+  padding: 12px 20px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 20px var(--neon);
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+#contactBtn:hover { box-shadow: 0 0 40px var(--neon); }
+
+#contactMenu {
+  display: none;
+  flex-direction: column;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 10px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 20px rgba(176,38,255,.3);
+}
+#contactMenu a {
+  text-decoration: none;
+  color: var(--white);
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin: 5px 0;
+  background: rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  font-family: 'JetBrains Mono';
+}
+#contactMenu a:hover {
+  background: var(--neon);
+  color: black;
+}
+</style>
+
+<script>
+const contactBtn = document.getElementById("contactBtn");
+const contactMenu = document.getElementById("contactMenu");
+contactBtn.addEventListener("click", () => {
+  contactMenu.style.display = contactMenu.style.display === "flex" ? "none" : "flex";
+});
+</script>
+
 
   <div class="glass project">
     <img src="ruta/luma_scanner.png" alt="Luma Scanner">
@@ -320,149 +390,6 @@ button:hover{
   <div class="links">
     <a href="https://github.com/Sp1kx" target="_blank">Ver los proyectos en GitHub</a>
   </div>
-</section>
-<section data-aos="fade-up">
-  <h2>Contacto</h2><br>
-  <div class="links">
-    <a href="https://t.me/sp1kz" target="_blank">Telegram</a>
-  </div>
-  
-  <form id="contactForm" action="https://formspree.io/f/meeleeww.json" method="POST">
-    <!-- Elemento de feedback (inicialmente oculto) -->
-    <div id="feedback" class="feedback-message"></div>
-    
-    <!-- Campos del formulario -->
-    <input type="text" name="name" id="name" placeholder="Nombre" required>
-    <input type="email" name="email" id="email" placeholder="Email" required>
-    <textarea name="message" id="message" rows="4" placeholder="Mensaje" required></textarea>
-    
-    <!-- Botón de envío -->
-    <button type="submit">Enviar</button>
-  </form>
-</section>
-
-<script>
-
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('contactForm');
-  const feedback = document.getElementById('feedback');
-  const submitBtn = form.querySelector('button');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    feedback.textContent = 'Enviando mensaje...';
-    feedback.className = 'feedback-message sending';
-    feedback.style.display = 'block';
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando...';
-
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (response.ok) {
-        feedback.textContent = '¡Mensaje enviado con éxito!';
-        feedback.className = 'feedback-message success';
-        form.reset();
-      } else {
-        throw new Error('Error en Formspree');
-      }
-    } catch {
-      feedback.textContent = 'Error al enviar. Inténtalo más tarde.';
-      feedback.className = 'feedback-message error';
-    }
-
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Enviar';
-
-    setTimeout(() => {
-      feedback.style.display = 'none';
-    }, 4000);
-  });
-});
-</script>
-
-
-<style>
-.feedback-message {
-  padding: 12px 15px;
-  margin-bottom: 20px;
-  border-radius: 6px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.95rem;
-  display: none;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.feedback-message.sending {
-  display: block;
-  background-color: #e3f2fd;
-  color: #1565c0;
-  border: 1px solid #bbdefb;
-}
-
-.feedback-message.success {
-  display: block;
-  background-color: #e8f5e9;
-  color: #2e7d32;
-  border: 1px solid #c8e6c9;
-}
-
-.feedback-message.error {
-  display: block;
-  background-color: #ffebee;
-  color: #c62828;
-  border: 1px solid #ffcdd2;
-}
-
-#contactForm input,
-#contactForm textarea {
-  width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
-#contactForm textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-#contactForm button[type="submit"] {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-}
-
-#contactForm button[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-#contactForm button[type="submit"]:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-</style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
