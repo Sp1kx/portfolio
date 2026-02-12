@@ -143,7 +143,8 @@ section{
   width:100%;
   border-radius:15px;
   background:#111;
-  height:280px;
+  height:auto; 
+  max-height:400px; 
   object-fit:cover;
   transition:transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -159,162 +160,59 @@ section{
   margin-top:20px;
 }
 .project-grid .project img{
-  height:180px;
-  object-fit:cover;
+  height:auto;
+  max-height:280px; 
 }
 
 @media(max-width:768px){
-  .project{grid-template-columns:1fr}
-}
+  section {
+    padding: 50px 5%; 
+  }
 
-form{
-  max-width:600px;
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-  position:relative;
-}
-input,textarea{
-  background:transparent;
-  border:1px solid var(--border);
-  padding:15px;
-  color:white;
-  border-radius:10px;
-  font-family:'JetBrains Mono';
-}
-input:focus,textarea:focus{
-  outline:2px solid var(--neon);
-}
-button{
-  background:var(--neon);
-  color:black;
-  border:none;
-  padding:15px;
-  font-weight:700;
-  cursor:pointer;
-  border-radius:10px;
-  box-shadow:0 0 20px var(--neon);
-  transition:all 0.3s ease;
-}
-button:hover{
-  box-shadow:0 0 40px var(--neon);
-}
+  .project {
+    grid-template-columns: 1fr; 
+  }
 
-.links{
-  margin-top:40px;
-  display:flex;
-  justify-content:center;
-  gap:30px;
-}
-.links a{
-  color:white;
-  text-decoration:none;
-  border:1px solid var(--border);
-  padding:10px 20px;
-  border-radius:30px;
-  transition:.3s;
-}
-.links a:hover{
-  box-shadow:0 0 25px var(--neon);
-}
-
-#feedback{
-  position:absolute;
-  top:-30px;
-  left:50%;
-  transform:translateX(-50%);
-  color:var(--neon);
-  font-weight:700;
-  display:none;
-}
-</style>
-</head>
-<body>
-
-<header>
-<section class="hero">
-  <h1 class="glitch">David Soriano</h1>
-  <div class="subtitle" id="typing"></div>
-</section>
-</header>
-
-<main>
-    
-<section data-aos="fade-up">
-  <h2>Skills</h2><br>
-  <div class="skills-grid">
-    <div class="glass skill">
-      <p>Mounting Hardware</p>
-      <div class="bar"><div style="width:80%"></div></div>
-    </div>
-    <div class="glass skill">
-      <p>Linux & Kali</p>
-      <div class="bar"><div style="width:85%"></div></div>
-    </div>
-    <div class="glass skill">
-      <p>Web Hacking</p>
-      <div class="bar"><div style="width:75%"></div></div>
-    </div>
-    <div class="glass skill">
-      <p>Pentesting Apps/Web</p>
-      <div class="bar"><div style="width:70%"></div></div>
-    </div>
-    <div class="glass skill">
-      <p>Python Automation</p>
-      <div class="bar"><div style="width:80%"></div></div>
-    </div>
-  </div>
-</section>
-
-<style>
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-}
-
-@media(max-width:768px){
   .skills-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; 
+  }
+
+  .links {
+    flex-direction: column; 
+    align-items: center; 
+  }
+
+  .links a {
+    padding: 10px; 
   }
 }
-</style>
 
-<div id="contactPopup">
-  <button id="contactBtn">Contacto</button>
-  <div id="contactMenu">
-    <a href="mailto:david02soriano@gmail.com" target="_blank">Email</a>
-    <a href="https://wa.me/34643787283" target="_blank">WhatsApp</a>
-    <a href="https://t.me/sp1kz" target="_blank">Telegram</a>
-  </div>
-</div>
-
-<style>
+/* Estilo del botón de contacto */
 #contactPopup {
   position: fixed;
   right: 20px;
-  bottom: 50%;
-  transform: translateY(50%);
+  bottom: 70px; /* Ajustado para estar por encima del botón de GitHub */
   z-index: 999;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-#contactBtn {
+#contactBtn, #githubBtn {
   background: var(--neon);
   color: black;
   border: none;
-  padding: 12px 20px;
+  padding: 15px 20px; /* Tamaño del botón */
   font-weight: 700;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 0 0 20px var(--neon);
-  margin-bottom: 10px;
   transition: all 0.3s ease;
 }
-#contactBtn:hover { box-shadow: 0 0 40px var(--neon); }
+
+#contactBtn:hover, #githubBtn:hover {
+  box-shadow: 0 0 40px var(--neon);
+}
 
 #contactMenu {
   display: none;
@@ -340,7 +238,65 @@ button:hover{
   background: var(--neon);
   color: black;
 }
+
+.githubPopup {
+  position: fixed;
+  right: 20px;
+  bottom: 20px; /* Ajustado para estar más cerca de la parte inferior como el botón de contacto */
+  z-index: 999;
+}
 </style>
+</head>
+<body>
+
+<header>
+<section class="hero">
+  <h1 class="glitch">David Soriano</h1>
+  <div class="subtitle" id="typing"></div>
+</section>
+</header>
+
+<main>
+    
+<section data-aos="fade-up">
+  <h2>Skills</h2>
+
+  <div class="skills-grid">
+    <div class="glass skill">
+      <p>Mounting Hardware</p>
+      <div class="bar"><div style="width:80%"></div></div>
+    </div>
+    <div class="glass skill">
+      <p>Linux & Kali</p>
+      <div class="bar"><div style="width:85%"></div></div>
+    </div>
+    <div class="glass skill">
+      <p>Web Hacking</p>
+      <div class="bar"><div style="width:75%"></div></div>
+    </div>
+    <div class="glass skill">
+      <p>Pentesting Apps/Web</p>
+      <div class="bar"><div style="width:70%"></div></div>
+    </div>
+    <div class="glass skill">
+      <p>Python Automation</p>
+      <div class="bar"><div style="width:80%"></div></div>
+    </div>
+  </div>
+</section>
+
+<div id="contactPopup">
+  <button id="contactBtn">Contacto</button>
+  <div id="contactMenu">
+    <a href="mailto:david02soriano@gmail.com" target="_blank">Email</a>
+    <a href="https://wa.me/34643787283" target="_blank">WhatsApp</a>
+    <a href="https://t.me/sp1kz" target="_blank">Telegram</a>
+  </div>
+</div>
+
+<div class="githubPopup">
+  <button id="githubBtn" onclick="window.open('https://github.com/Sp1kx', '_blank');">Ver proyectos en GitHub</button>
+</div>
 
 <script>
 const contactBtn = document.getElementById("contactBtn");
@@ -350,46 +306,47 @@ contactBtn.addEventListener("click", () => {
 });
 </script>
 
-
-  <div class="glass project">
-    <img src="ruta/luma_scanner.png" alt="Luma Scanner">
-    <div>
-      <h3>Luma Scanner</h3>
-      <p>
-        Framework avanzado de auditoría y detección de vulnerabilidades web, con autoexploits de bases de datos
-        y un sistema de autoreport de vulnerabilidades para bug bounty.
-      </p>
-    </div>
-  </div><br>
-
-  <div class="glass">
-    <h3>Custom Tools</h3>
+<div class="glass project">
+  <img src="ruta/luma_scanner.png" alt="Luma Scanner">
+  <div>
+    <h3>Luma Scanner</h3>
     <p>
-      Desarrollo de herramientas privadas para gestión de combos, scraping,
-      automatización y scripts personalizados en Python.
+      Framework avanzado de auditoría y detección de vulnerabilidades web, con autoexploits de bases de datos
+      y un sistema de autoreport de vulnerabilidades para bug bounty.
     </p>
+  </div>
+</div>
 
-    <div class="project-grid">
-      <div class="glass project">
-        <img src="ruta/tool1.png" alt="Tool 1">
-        <div>
-          <h4>Tool 1</h4>
-          <p>Descripción de la Tool 1.</p>
-        </div>
-      </div>
-      <div class="glass project">
-        <img src="ruta/tool2.png" alt="Tool 2">
-        <div>
-          <h4>Tool 2</h4>
-          <p>Descripción de la Tool 2.</p>
-        </div>
+
+<div class="glass">
+  <h3>Custom Tools</h3>
+  <p>
+    Desarrollo de herramientas privadas para gestión de combos, scraping,
+    automatización y scripts personalizados en Python.
+  </p>
+
+  <div class="project-grid">
+    <div class="glass project">
+      <img src="ruta/tool1.png" alt="Tool 1">
+      <div>
+        <h4>Tool 1</h4>
+        <p>Descripción de la Tool 1.</p>
       </div>
     </div>
-  </div><br>
-
-  <div class="links">
-    <a href="https://github.com/Sp1kx" target="_blank">Ver los proyectos en GitHub</a>
+    <div class="glass project">
+      <img src="ruta/tool2.png" alt="Tool 2">
+      <div>
+        <h4>Tool 2</h4>
+        <p>Descripción de la Tool 2.</p>
+      </div>
+    </div>
   </div>
+</div>
+
+
+<div class="links">
+  <a href="https://github.com/Sp1kx" target="_blank">Ver los proyectos en GitHub</a>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -415,7 +372,6 @@ function typeEffect(timestamp){
 }
 
 requestAnimationFrame(typeEffect);
-
 
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
