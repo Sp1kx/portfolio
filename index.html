@@ -44,11 +44,12 @@ section{
 }
 
 .glitch{
-  font-size:clamp(4rem,10vw,9rem);
+  font-size:clamp(2.5rem,10vw,9rem);
   font-weight:800;
   position:relative;
   color:var(--white);
   text-shadow:0 0 20px var(--neon);
+  word-break:break-word;
 }
 .glitch::before,.glitch::after{
   content:"David Soriano";
@@ -73,7 +74,7 @@ section{
 
 .subtitle{
   font-family:'JetBrains Mono',monospace;
-  font-size:1.2rem;
+  font-size:clamp(0.8rem,3vw,1.2rem);
   margin-top:20px;
   color:var(--neon);
   letter-spacing:2px;
@@ -102,8 +103,9 @@ section{
 
 .skills-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:30px;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:20px;
+  margin-top:20px;
 }
 .skill{
   text-align:center;
@@ -112,6 +114,7 @@ section{
 }
 .skill p{
   margin-bottom:10px;
+  font-size:clamp(0.75rem,2vw,1rem);
 }
 .bar{
   background:#222;
@@ -133,7 +136,7 @@ section{
 .project{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:40px;
+  gap:30px;
   perspective:500px;
 }
 .project:hover{
@@ -155,7 +158,7 @@ section{
 
 .project-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:20px;
   margin-top:20px;
 }
@@ -165,33 +168,73 @@ section{
 }
 
 @media(max-width:768px){
-  section {
-    padding: 50px 5%; 
+  section{
+    padding:60px 5%;
+    min-height:auto;
   }
 
-  .project {
-    grid-template-columns: 1fr; 
+  .hero{
+    padding-top:80px;
+    padding-bottom:60px;
   }
 
-  .skills-grid {
-    grid-template-columns: 1fr; 
+  .project{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  .project img{
+    max-height:220px;
+  }
+  .project-grid{
+    grid-template-columns:1fr;
+  }
+  .project-grid .project img{
+    max-height:200px;
   }
 
-  .links {
-    flex-direction: column; 
-    align-items: center; 
+  .skills-grid{
+    grid-template-columns:1fr 1fr;
+    gap:15px;
   }
 
-  .links a {
-    padding: 10px; 
+  .project div h3,
+  .project div h4{
+    font-size:1rem;
+    margin-bottom:8px;
+  }
+  .project div p{
+    font-size:0.85rem;
+    line-height:1.6;
+  }
+
+  .glass{
+    padding:20px 16px;
+  }
+
+  #contactBtn, #githubBtn{
+    padding:12px 14px;
+    font-size:0.85rem;
+  }
+  #contactPopup{
+    bottom:75px;
+    right:12px;
+  }
+  .githubPopup{
+    bottom:18px;
+    right:12px;
   }
 }
 
-/* Estilo del botón de contacto */
+@media(max-width:400px){
+  .skills-grid{
+    grid-template-columns:1fr;
+  }
+}
+
 #contactPopup {
   position: fixed;
   right: 20px;
-  bottom: 70px; /* Ajustado para estar por encima del botón de GitHub */
+  bottom: 70px;
   z-index: 999;
   display: flex;
   flex-direction: column;
@@ -202,12 +245,13 @@ section{
   background: var(--neon);
   color: black;
   border: none;
-  padding: 15px 20px; /* Tamaño del botón */
+  padding: 15px 20px;
   font-weight: 700;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 0 0 20px var(--neon);
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 #contactBtn:hover, #githubBtn:hover {
@@ -223,6 +267,7 @@ section{
   padding: 10px;
   backdrop-filter: blur(15px);
   box-shadow: 0 0 20px rgba(176,38,255,.3);
+  margin-bottom: 10px;
 }
 #contactMenu a {
   text-decoration: none;
@@ -233,6 +278,7 @@ section{
   background: rgba(0,0,0,0.2);
   transition: all 0.3s ease;
   font-family: 'JetBrains Mono';
+  font-size: 0.9rem;
 }
 #contactMenu a:hover {
   background: var(--neon);
@@ -242,7 +288,7 @@ section{
 .githubPopup {
   position: fixed;
   right: 20px;
-  bottom: 20px; /* Ajustado para estar más cerca de la parte inferior como el botón de contacto */
+  bottom: 20px;
   z-index: 999;
 }
 </style>
@@ -286,12 +332,13 @@ section{
 </section>
 
 <div id="contactPopup">
-  <button id="contactBtn">Contacto</button>
   <div id="contactMenu">
     <a href="mailto:david02soriano@gmail.com" target="_blank">Email</a>
     <a href="https://wa.me/34643787283" target="_blank">WhatsApp</a>
     <a href="https://t.me/sp1kz" target="_blank">Telegram</a>
+    <a href="https://www.linkedin.com/in/sp1kz" target="_blank">LinkedIn</a>
   </div>
+  <button id="contactBtn">Contacto</button>
 </div>
 
 <div class="githubPopup">
